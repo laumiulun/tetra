@@ -1,5 +1,5 @@
 //* This file is part of the MOOSE framework
-//* https://mooseframework.inl.gov
+//* https://www.mooseframework.org
 //*
 //* All rights reserved, see COPYRIGHT for full restrictions
 //* https://github.com/idaholab/moose/blob/master/COPYRIGHT
@@ -16,7 +16,7 @@ class TetraApp : public MooseApp
 public:
   static InputParameters validParams();
 
-  TetraApp(const InputParameters & parameters);
+  TetraApp(InputParameters parameters);
   virtual ~TetraApp();
 
   static void registerApps();

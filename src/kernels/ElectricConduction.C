@@ -6,20 +6,20 @@ InputParameters
 ElectricConduction::validParams()
 {
   InputParameters params = ADKernelGrad::validParams();
-  params.addClassDescription("Computes contribution from electric potential to  the electric conduction potential by : "
-                             "$(\\sigma \\nabla V \\nabla \\phi )$");
+  params.addClassDescription("Compute the electric conduction potential by : "
+                             "$(\\sigma \\nabla u )$");
   return params;
 }
 
 ElectricConduction::ElectricConduction(const InputParameters & parameters)
   : ADKernelGrad(parameters),
 
-    _resistivity(getADMaterialProperty<Real>("resistivity"))
+    _resistance(getADMaterialProperty<Real>("resistance"))
 {
 }
 
 ADRealVectorValue
 ElectricConduction::precomputeQpResidual()
 {
-  return (-1 / _resistivity[_qp]) * _grad_u[_qp];
+  return -(1 / _resistance[_qp]) * _grad_u[_qp];
 }

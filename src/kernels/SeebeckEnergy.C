@@ -6,10 +6,9 @@ InputParameters
 SeebeckEnergy::validParams()
 {
   InputParameters params = ADKernelGrad::validParams();
-  params.addClassDescription("Computes the contribution of the Seebeck effect "
-                             "to the current density continuity equation: "
-                             "$(\\sigma S \\nabla T \\nabla \\phi )$");
-  params.addRequiredCoupledVar("temp", "Temperature variable");
+  params.addClassDescription("Compute the energy potential by : "
+                             "$(\\sigma \\alpha \\nabla u  )$");
+  params.addRequiredCoupledVar("temp", "temperature_variable");
   return params;
 }
 
@@ -19,12 +18,12 @@ SeebeckEnergy::SeebeckEnergy(const InputParameters & parameters)
     _grad_temp(adCoupledGradient("temp")),
 
     _seebeck(getADMaterialProperty<Real>("seebeck")),
-    _resistivity(getADMaterialProperty<Real>("resistivity"))
+    _resistance(getADMaterialProperty<Real>("resistance"))
 {
 }
 
 ADRealVectorValue
 SeebeckEnergy::precomputeQpResidual()
 {
-  return -(_seebeck[_qp] / _resistivity[_qp]) * _grad_temp[_qp];
+  return -(_seebeck[_qp] / _resistance[_qp]) * _grad_temp[_qp];
 }
