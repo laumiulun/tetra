@@ -1,7 +1,0 @@
-[Tests]
-  [test]
-    type = CSVDiff
-    input = 'pleg_cuboid.i'
-    csvdiff = 'pleg_cuboid_csv.csv'
-  []
-[]
